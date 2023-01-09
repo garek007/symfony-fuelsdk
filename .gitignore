@@ -1,0 +1,8 @@
+vendor/
+var/cache/dev/*
+var/log/*
+/bin/*
+!bin/console
+.env
+.DS_Store
+src/MCHelper/MC_Config.php

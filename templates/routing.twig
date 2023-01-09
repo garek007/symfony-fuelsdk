@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th>Link</th>
+      {% for column in columns %}
+      {% if column not in ['FutureForce','ContentBlockID','TriggeredSendContentBlockID','FooterGraphicURL','Language','FieldList'] %}
+      <th scope="col"><div class="slds-truncate" title="{{column}}">{{column}}</div></th>
+      {% endif %}
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in rows %}
+    <tr class="slds-hint-parent">
+      {% if row['FieldList'] is not empty %}
+          {% set version = 'w2'%}
+        {% else %}
+          {% set version = 'w' %}
+        {% endif %}
+        
+      <td><a href="https://careers.mail.salesforce.com/{{version}}?cid={{row['CampaignId']}}" target="_blank">Preview</a></td>
+      {% for column in columns %}
+      {% if column not in ['FutureForce','ContentBlockID','TriggeredSendContentBlockID','FooterGraphicURL','Language','FieldList'] %}
+      <td data-label="{{column}}">
+        <div class="slds-truncate" title="{{row[column]}}">
+          {% if 'image' in row[column]%}<img src="{% endif %}
+          {% if column == 'CampaignId' %}<a href="https://dreamjobcentral.lightning.force.com/lightning/r/Campaign/{{row[column]}}/view" target="_blank">{% endif %}
+          {{row[column]}}
+          {% if column == 'CampaignId' %}</a>{% endif %}
+          {% if 'image' in row[column]%}">{% endif %}
+        </div>
+      </td>
+      {% endif %}
+      {% endfor %}  
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

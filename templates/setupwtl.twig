@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action="/createwtl" method="post">
+{% include 'fields/input.twig' with {'id':'CampaignId','label':'Campaign ID','placeholder':'whatevs'} %}
+{% include 'fields/input.twig' with {'id':'VanityURL','label':'Vanity URL or Description','placeholder':'whatevs'} %}
+{% include 'fields/input.twig' with {'id':'ContentBlockID','label':'Content Block ID','placeholder':'For the left side text'} %}
+{% include 'fields/input.twig' with {'id':'ImageURL','label':'Image URL','placeholder':'For the header image'} %}
+{% include 'fields/input.twig' with {'id':'RedirectURL','label':'Redirect URL','placeholder':'Where the page redirects to after submission.'} %}
+{% include 'fields/input.twig' with {'id':'FooterGraphicURL','label':'Footer Graphic URL','placeholder':'Optional'} %}
+
+
+<fieldset class="slds-form-element">
+    <legend class="slds-form-element__legend slds-form-element__label">Available Fields</legend>
+
+  {% for row in rows %}
+
+
+
+    <div class="slds-form-element__control">
+        <div class="slds-checkbox">
+            <input type="checkbox" name="options" id="{{row['Field_Friendly_ID']}}" value="{{row['Field_Friendly_ID']}}" />
+            <label class="slds-checkbox__label" for="{{row['Field_Friendly_ID']}}">
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label">{{row['Field_Friendly_ID']}}</span>
+            </label>
+        </div>
+    </div>
+
+
+  
+
+  {% endfor %}
+</fieldset>
+
+
+<button class="slds-button slds-button_brand">Submit</button>
+</form>
+{% endblock %}
